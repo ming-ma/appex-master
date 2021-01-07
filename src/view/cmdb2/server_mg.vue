@@ -103,13 +103,13 @@
                   <Input v-model="formValidate.hostname" :maxlength="45" placeholder="请输入主机名"></Input>
                 </FormItem>
               </div>
-              <FormItem label="IP" prop="ip">
-                <Input v-model="formValidate.ip" :maxlength="45" placeholder="请输入IP地址"></Input>
-              </FormItem>
               <FormItem label="公网IP" prop="public_ip">
                 <Input v-model="formValidate.public_ip" :maxlength="45" placeholder="公网IP"></Input>
               </FormItem>
-
+              <FormItem label="私网IP" prop="private_ip">
+                <Input v-model="formValidate.ip" :maxlength="45" placeholder="请输入IP地址"></Input>
+              </FormItem>
+            
               <FormItem label="Commaddr" prop="comm_ip">
                 <Input
                   v-model="formValidate.comm_ip"
@@ -323,8 +323,8 @@ export default {
       },
       formValidate: {
         hostname: "",
-        ip: "",
         public_ip: "",
+        private_ip: "",
         port: "22",
         region: "",
         comm_ip: "",
@@ -423,15 +423,15 @@ export default {
           }
         },
         {
-          title: "内网IP",
-          key: "ip",
+          title: "公网IP",
+          key: "public_ip",
           minWidth: 140,
           align: "center",
           sortable: true
         },
         {
-          title: "公网IP",
-          key: "public_ip",
+          title: "内网IP",
+          key: "private_ip",
           minWidth: 140,
           align: "center",
           sortable: true
@@ -632,7 +632,7 @@ export default {
       };
 
       //ip地址
-      let connect_ip = params.row.ip;
+      let connect_ip = params.row.public_ip;
       webterminnal(data).then(res => {
         if (res.data.code === 0) {
           // this.loading = false;
@@ -867,8 +867,8 @@ export default {
         this.formValidate = {
           id: paramsRow.id,
           hostname: paramsRow.hostname,
-          ip: paramsRow.ip,
           public_ip: paramsRow.public_ip,
+          private_ip: paramsRow.private_ip,
           port: paramsRow.port,
           idc: paramsRow.idc,
           region: paramsRow.region,
@@ -910,8 +910,8 @@ export default {
         this.formValidate = {
           id: paramsRow.id,
           hostname: paramsRow.hostname,
-          ip: paramsRow.ip,
           public_ip: paramsRow.public_ip,
+          private_ip: paramsRow.private_ip,
           port: paramsRow.port,
           idc: paramsRow.idc,
           region: paramsRow.region,
@@ -934,7 +934,7 @@ export default {
         if (this.selectTag) {
           this.formValidate = {
             hostname: "",
-            ip: "",
+            public_ip: "",
             port: "22",
             admin_user: "",
             idc: "",
@@ -954,7 +954,7 @@ export default {
         } else {
           this.formValidate = {
             hostname: "",
-            ip: "",
+            public_ip: "",
             port: "22",
             admin_user: "",
             idc: "",
