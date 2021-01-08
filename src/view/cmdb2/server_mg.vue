@@ -203,7 +203,15 @@
                 </Select>
               </FormItem>
 
-              <FormItem label="区域" prop="region">
+              <FormItem label="可用区" prop="region">
+                <Input
+                  v-model="formValidate.region"
+                  :maxlength="45"
+                  placeholder="Region区域，如：cn-shanghai, us-east-1"
+                ></Input>
+              </FormItem>
+
+              <FormItem label="区域" prop="location">
                 <Input
                   v-model="formValidate.region"
                   :maxlength="45"
@@ -327,6 +335,7 @@ export default {
         private_ip: "",
         port: "22",
         region: "",
+        location: "",
         comm_ip: "",
         orch_ip: "",
         orch_id: "",
@@ -371,10 +380,10 @@ export default {
             trigger: "blur"
           }
         ],
-        ip: [
+        public_ip: [
           {
             required: true,
-            message: "请输入IP",
+            message: "请输入公网IP",
             trigger: "blur"
           }
         ],
@@ -500,8 +509,15 @@ export default {
           sortable: true
         },
         {
-          title: "区域",
+          title: "可用区",
           key: "region",
+          width: 100,
+          align: "center",
+          sortable: true
+        },
+        {
+          title: "区域",
+          key: "location",
           width: 100,
           align: "center",
           sortable: true
@@ -872,6 +888,7 @@ export default {
           port: paramsRow.port,
           idc: paramsRow.idc,
           region: paramsRow.region,
+          location: paramsRow.location,
           admin_user: paramsRow.admin_user,
           tag_list: paramsRow.tag_list,
           detail: paramsRow.detail,
@@ -915,6 +932,7 @@ export default {
           port: paramsRow.port,
           idc: paramsRow.idc,
           region: paramsRow.region,
+          location: paramsRow.location,
           comm_ip: paramsRow.comm_ip,
           orch_ip: paramsRow.orch_ip,
           orch_id: paramsRow.orch_id,
@@ -939,6 +957,7 @@ export default {
             admin_user: "",
             idc: "",
             region: "",
+            location: "",
             comm_ip: "",
             orch_ip: "",
             orch_id: "",
@@ -959,6 +978,7 @@ export default {
             admin_user: "",
             idc: "",
             region: "",
+            location: "",
             comm_ip: "",
             orch_ip: "",
             orch_id: "",
