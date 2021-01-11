@@ -368,7 +368,6 @@ export default {
       //
       searchKey: "",
       searchValue: "",
-
       ruleValidate: {
         admin_user: [
           { required: true, message: "请选择管理用户", trigger: "change" }
@@ -530,7 +529,6 @@ export default {
         //   align: "center",
         //   sortable: true
         // },
-
         {
           title: "状态",
           key: "handle",
@@ -572,7 +570,6 @@ export default {
             }
           }
         },
-
         {
           title: "操作",
           key: "handle",
@@ -646,7 +643,6 @@ export default {
       const data = {
         server_id: params.row.id
       };
-
       //ip地址
       let connect_ip = params.row.public_ip;
       webterminnal(data).then(res => {
@@ -667,7 +663,6 @@ export default {
         }
       });
     },
-
     // 导出数据、支持分页、过滤、搜索、排序后导出
     exportData(type) {
       if (type === 1) {
@@ -687,7 +682,6 @@ export default {
         });
       }
     },
-
     // // 反向关联标签，支持多对多批量
     // handleSubmitlinkTag(value) {
     //   const data = {
@@ -718,7 +712,6 @@ export default {
     //   //   }
     //   // })
     // },
-
     //点击关联标签按钮
     HandlelinkTag() {
       console.log("长度", this.tableSelectIdList.length);
@@ -732,7 +725,6 @@ export default {
         this.$Message.info(`请选择你要关联的主机`);
       }
     },
-
     // 批量添加
     handlemultiAdd() {
       this.multi_dialog = {
@@ -815,7 +807,6 @@ export default {
         }
       });
     },
-
     // 获取管理用户列表
     getAdminUserList(page, limit, key, value) {
       getAdminUserList(page, limit, key, value).then(res => {
@@ -837,7 +828,6 @@ export default {
         }
       });
     },
-
     // 获取Tag列表
     getTagList() {
       getTagList().then(res => {
@@ -876,7 +866,6 @@ export default {
         sn: ""
       };
       this.getServerDetailList("ip", paramsRow.ip);
-
       setTimeout(() => {
         // const tag_list = paramsRow.tag_list.join(',')
         // if (tag_list) {tag_list.join(' ')}
@@ -1024,7 +1013,6 @@ export default {
     handleReset(name) {
       this.$refs[name].resetFields();
     },
-
     handlerAssetUpdate() {
       // console.log(this.tableSelectIdList.length)
       if (this.tableSelectIdList.length > 6) {
@@ -1071,7 +1059,6 @@ export default {
         this.$Message.info(`你总要选中点什么吧`);
       }
     },
-
     handleSyncTagTree() {
       this.loading = true;
       this.$Modal.confirm({
@@ -1097,7 +1084,6 @@ export default {
         }
       });
     },
-
     handlerDelete() {
       // console.log(this.tableSelectIdList.length)
       if (this.tableSelectIdList.length > 0) {
@@ -1203,7 +1189,6 @@ export default {
     //   this.getServerList(this.searchVal)
     // }
   },
-
   mounted() {
     this.getServerList();
     this.getTagList();
