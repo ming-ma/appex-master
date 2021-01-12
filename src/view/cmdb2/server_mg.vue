@@ -103,11 +103,11 @@
                   <Input v-model="formValidate.hostname" :maxlength="45" placeholder="请输入主机名"></Input>
                 </FormItem>
               </div>
-              <FormItem label="公网IP" prop="public_ip">
-                <Input v-model="formValidate.public_ip" :maxlength="45" placeholder="公网IP"></Input>
+              <FormItem label="公网IP" prop="ip">
+                <Input v-model="formValidate.ip" :maxlength="45" placeholder="公网IP"></Input>
               </FormItem>
-              <FormItem label="私网IP" prop="private_ip">
-                <Input v-model="formValidate.ip" :maxlength="45" placeholder="请输入IP地址"></Input>
+              <FormItem label="私网IP">
+                <Input v-model="formValidate.private_ip" :maxlength="45" placeholder="请输入IP地址"></Input>
               </FormItem>
             
               <FormItem label="Commaddr" prop="comm_ip">
@@ -118,7 +118,7 @@
                 ></Input>
               </FormItem>
 
-              <FormItem label="Orch IP" prop="orch_ip">
+              <FormItem label="Orch域名" prop="orch_ip">
                 <Input
                   v-model="formValidate.orch_ip"
                   :maxlength="45"
@@ -331,7 +331,7 @@ export default {
       },
       formValidate: {
         hostname: "",
-        public_ip: "",
+        ip: "",
         private_ip: "",
         port: "22",
         region: "",
@@ -379,7 +379,7 @@ export default {
             trigger: "blur"
           }
         ],
-        public_ip: [
+        ip: [
           {
             required: true,
             message: "请输入公网IP",
@@ -411,7 +411,7 @@ export default {
         {
           title: "主机名",
           key: "hostname",
-          minWidth: 200,
+          minWidth: 140,
           // width: 350,
           align: "center",
           // fixed: 'left',
@@ -432,15 +432,15 @@ export default {
         },
         {
           title: "公网IP",
-          key: "public_ip",
-          minWidth: 140,
+          key: "ip",
+          minWidth: 120,
           align: "center",
           sortable: true
         },
         {
           title: "内网IP",
           key: "private_ip",
-          minWidth: 140,
+          minWidth: 120,
           align: "center",
           sortable: true
         },
@@ -459,7 +459,7 @@ export default {
           sortable: true
         },
         {
-          title: "Orch IP",
+          title: "Orch域名",
           key: "orch_ip",
           width: 110,
           align: "center",
@@ -510,7 +510,7 @@ export default {
         {
           title: "可用区",
           key: "region",
-          width: 100,
+          width: 140,
           align: "center",
           sortable: true
         },
@@ -518,6 +518,12 @@ export default {
           title: "区域",
           key: "location",
           width: 100,
+          align: "center",
+          sortable: true
+        },{
+          title: "创建时间",
+          key: "create_time",
+          width: 160,
           align: "center",
           sortable: true
         },
@@ -644,7 +650,7 @@ export default {
         server_id: params.row.id
       };
       //ip地址
-      let connect_ip = params.row.public_ip;
+      let connect_ip = params.row.ip;
       webterminnal(data).then(res => {
         if (res.data.code === 0) {
           // this.loading = false;
@@ -872,8 +878,9 @@ export default {
         this.formValidate = {
           id: paramsRow.id,
           hostname: paramsRow.hostname,
-          public_ip: paramsRow.public_ip,
+          ip: paramsRow.ip,
           private_ip: paramsRow.private_ip,
+          public_ip: paramsRow.public_ip,
           port: paramsRow.port,
           idc: paramsRow.idc,
           region: paramsRow.region,
@@ -916,7 +923,7 @@ export default {
         this.formValidate = {
           id: paramsRow.id,
           hostname: paramsRow.hostname,
-          public_ip: paramsRow.public_ip,
+          ip: paramsRow.ip,
           private_ip: paramsRow.private_ip,
           port: paramsRow.port,
           idc: paramsRow.idc,
@@ -930,6 +937,7 @@ export default {
           project_name: paramsRow.project_name,
           jump_id: paramsRow.jump_id,
           owner_name: paramsRow.owner_name,
+          create_time: paramsRow.create_time,
           admin_user: paramsRow.admin_user,
           tag_list: paramsRow.tag_list,
           detail: paramsRow.detail
@@ -941,7 +949,7 @@ export default {
         if (this.selectTag) {
           this.formValidate = {
             hostname: "",
-            public_ip: "",
+            ip: "",
             port: "22",
             admin_user: "",
             idc: "",
@@ -955,6 +963,7 @@ export default {
             project_name: "",
             jump_id: "",
             owner_name: "",
+            create_time: "",
             tag_list: [this.selectTag],
             detail: "",
             state: "new"
@@ -962,7 +971,7 @@ export default {
         } else {
           this.formValidate = {
             hostname: "",
-            public_ip: "",
+            ip: "",
             port: "22",
             admin_user: "",
             idc: "",
@@ -974,6 +983,7 @@ export default {
             pop_id: "",
             bandwidth: "",
             project_name: "",
+            create_time: "",
             jump_id: "",
             owner_name: "",
             tag_list: [],
