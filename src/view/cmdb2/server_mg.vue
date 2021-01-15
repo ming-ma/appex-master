@@ -162,7 +162,7 @@
                 <Input
                   v-model="formValidate.owner_name"
                   :maxlength="45"
-                  placeholder="输入项目名称"
+                  placeholder="输入负责人"
                 ></Input>
               </FormItem>
 
@@ -215,7 +215,7 @@
                 <Input
                   v-model="formValidate.region"
                   :maxlength="45"
-                  placeholder="Region区域，如：cn-shanghai, us-east-1"
+                  placeholder="区域，如：北京"
                 ></Input>
               </FormItem>
 
@@ -386,6 +386,13 @@ export default {
             trigger: "blur"
           }
         ],
+        private_ip: [
+          {
+            required: true,
+            message: "请输入内网IP",
+            trigger: "blur"
+          }
+        ],
         port: [
           {
             required: true,
@@ -397,6 +404,13 @@ export default {
           {
             required: true,
             message: "请选择管理用户",
+            trigger: "blur"
+          }
+        ],
+        owner_name: [
+          {
+            required: true,
+            message: "请输入负责人",
             trigger: "blur"
           }
         ]
