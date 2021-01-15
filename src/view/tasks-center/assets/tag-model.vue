@@ -15,12 +15,6 @@
           <Button v-if="selectTwo === 'server'"  @click="handlerServer(null, 'post', '添加主机')">添加主机</Button>
           <Button v-else-if="selectTwo === 'DB'" @click="handlerDB(null, 'post', '添加数据库')" >添加数据库</Button>
           <Button v-else @click="handlerTag(null, 'post', '新建标签')" >新建标签</Button>
-          <template v-if="tableSelectIdList.length > 0">
-              <Button  @click="handlerDelete">批量删除</Button>
-            </template>
-            <template v-else>
-              <Button  @click="handlerDelete" disabled>批量删除</Button>
-            </template>
         </ButtonGroup>
       </div>
          <Table v-if="selectTwo === 'DB'" size="small"  ref="selection" :columns="columns" :data="tableDataDB"  @on-selection-change="handleSelectChange"></Table>
@@ -335,7 +329,7 @@
         {
           title: '主机名称',
           key: 'hostname',
-          minWidth: 220,
+          minWidth: 200,
           render: (h, params) => {
             return h('div', [
               h('a',{
@@ -350,8 +344,10 @@
             ])
           }
         },
-        { title: 'IP', key: 'ip',  minWidth: 200, },
+        { title: 'IP', key: 'ip',  minWidth: 120, },
         // { title: 'IDC', key: 'idc', align: 'center', minWidth: 120},
+        { title: 'Orch域名', key: 'orch_ip', align: 'center', minWidth: 120},
+        { title: 'Orch ID', key: 'orch_id', align: 'center', minWidth: 80},
         { title: '区域', key: 'region', align: 'center', minWidth: 120},
         { title: '状态', key: 'state', minWidth: 100, align: 'center'},
         { title: '#', key: 'handle', width: 150,
@@ -592,6 +588,8 @@
               hostname: paramsRow.hostname,
               ip: paramsRow.ip,
               idc: paramsRow.idc,
+              orch_ip: paramsRow.orch_ip,
+              orch_id: paramsRow.orch_id,
               region: paramsRow.region,
               tag_list: paramsRow.tag_list,
             }
@@ -602,6 +600,8 @@
               idc: '',
               ip: '',
               region:'',
+              orch_ip:'',
+              orch_id:'',
               tag_list: [],
             }
           }
