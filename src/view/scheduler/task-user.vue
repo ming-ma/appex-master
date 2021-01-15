@@ -156,12 +156,12 @@ export default {
           placeholder: '请输入端口号，一般为22'
         },
         {
-          name: 'remarks',
+          name: 'password',
           type: 'i-input',
-          value: meth === 'put' ? this.tableData[index].remarks : '',
-          label: '备注信息',
+          value: meth === 'put' ? this.tableData[index].password : '',
+          label: '用户密码',
           maxlength: 120,
-          placeholder: '请简单的备注一下。'
+          placeholder: '密码和密钥同时存在，会优先使用密码。'
         },
         {
           name: 'user_key',
@@ -174,6 +174,14 @@ export default {
           rule: [
             { required: true, message: '用户私钥不能为空', trigger: 'blur' }
           ]
+        },
+        {
+          name: 'remarks',
+          type: 'i-input',
+          value: meth === 'put' ? this.tableData[index].remarks : '',
+          label: '备注信息',
+          maxlength: 120,
+          placeholder: '请简单的备注一下。'
         }
       ]
     },
