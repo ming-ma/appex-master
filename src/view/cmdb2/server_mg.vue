@@ -1,7 +1,7 @@
 <template>
   <div>
     <Row :gutter="10">
-      <i-col :md="24" :lg="3" style="margin-bottom: 20px;">
+      <i-col :md="24" :lg="4" style="margin-bottom: 20px;">
         <Card>
           <Tree
             ref="tree"
@@ -11,7 +11,7 @@
           ></Tree>
         </Card>
       </i-col>
-      <i-col :md="24" :lg="21" style="margin-bottom: 10px;">
+      <i-col :md="24" :lg="20" style="margin-bottom: 10px;">
         <Card>
           <Alert
             banner
@@ -503,7 +503,7 @@ export default {
         {
           title: "项目",
           key: "project_name",
-          width: 100,
+          width: 200,
           align: "center",
           sortable: true
         },
