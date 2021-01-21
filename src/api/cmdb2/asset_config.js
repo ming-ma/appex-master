@@ -1,19 +1,10 @@
 import axios from '@/libs/api.request'
 
 
-// 获取RDS信息
-export const handleUpdateredis = () => {
+// 获取费用信息
+export const handleUpdateexpense = () => {
   return axios.request({
-    url: '/cmdb2/v1/cmdb/asset_configs/handler_update_redis/',
-    method: 'get'
-
-  })
-}
-
-// 获取RDS信息
-export const handleUpdaterds = () => {
-  return axios.request({
-    url: '/cmdb2/v1/cmdb/asset_configs/handler_update_rds/',
+    url: '/cmdb2/v1/cmdb/asset_configs/handler_update_expense/',
     method: 'get'
 
   })
