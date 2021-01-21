@@ -967,6 +967,7 @@ export default {
           region: paramsRow.region,
           location: paramsRow.location,
           comm_ip: paramsRow.comm_ip,
+          
           orch_ip: paramsRow.orch_ip,
           orch_id: paramsRow.orch_id,
           pop_id: paramsRow.pop_id,
