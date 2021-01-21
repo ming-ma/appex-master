@@ -60,6 +60,7 @@
             <Button type="primary" class="search-btn" @click="exportData(2)">
               <Icon type="ios-download-outline"></Icon>导出数据
             </Button>
+            <Button type="primary" class="search-btn" @click="handlerAssetRecycled">回收站</Button>
           </div>
 
           <!-- <Table size="small" ref="selection" border :columns="columns":data="tableData"@on-selection-change="handleSelectChange"></Table> -->
@@ -285,6 +286,7 @@
 import Detail from "./server_detail";
 import {
   getServerList,
+  getRecysList,
   getServerDetailList,
   operationServer,
   assetServerUpdate,
@@ -468,14 +470,14 @@ export default {
         {
           title: "Commaddr",
           key: "comm_ip",
-          width: 140,
+          width: 130,
           align: "center",
           sortable: true
         },
         {
           title: "Orch域名",
           key: "orch_ip",
-          width: 110,
+          width: 130,
           align: "center",
           sortable: true
         },
@@ -510,14 +512,14 @@ export default {
         {
           title: "负责人",
           key: "owner_name",
-          width: 100,
+          width: 80,
           align: "center",
           sortable: true
         },
         {
-          title: "Jumpserver",
+          title: "Jump",
           key: "jump_id",
-          width: 140,
+          width: 80,
           align: "center",
           sortable: true
         },
@@ -534,9 +536,17 @@ export default {
           width: 100,
           align: "center",
           sortable: true
-        },{
+        },
+        {
           title: "创建时间",
           key: "create_time",
+          width: 160,
+          align: "center",
+          sortable: true
+        },
+        {
+          title: "修改时间",
+          key: "update_time",
           width: 160,
           align: "center",
           sortable: true
@@ -791,6 +801,18 @@ export default {
         }
       });
     },
+     // 获取回收主机信息
+    getRecysList(key, value) {
+      getRecysList(this.pageNum, this.pageSize, key, value).then(res => {
+        if (res.data.code === 0) {
+          // console.log('count-->',res.data.count)
+          this.pageTotal = res.data.count;
+          this.tableData = res.data.data;
+        } else {
+          this.$Message.error(`${res.data.msg}`);
+        }
+      });
+    },
     // 获取主机信息
     getServerList(key, value) {
       getServerList(this.pageNum, this.pageSize, key, value).then(res => {
@@ -803,6 +825,7 @@ export default {
         }
       });
     },
+   
     // 获取主机详情
     getServerDetailList(key, value) {
       // console.log('key, vlaue', key,value)
@@ -952,6 +975,7 @@ export default {
           jump_id: paramsRow.jump_id,
           owner_name: paramsRow.owner_name,
           create_time: paramsRow.create_time,
+          update_time: paramsRow.update_time,
           admin_user: paramsRow.admin_user,
           tag_list: paramsRow.tag_list,
           detail: paramsRow.detail
@@ -978,6 +1002,7 @@ export default {
             jump_id: "",
             owner_name: "",
             create_time: "",
+            update_time: "",
             tag_list: [this.selectTag],
             detail: "",
             state: "new"
@@ -998,6 +1023,7 @@ export default {
             bandwidth: "",
             project_name: "",
             create_time: "",
+            update_time: "",
             jump_id: "",
             owner_name: "",
             tag_list: [],
@@ -1151,6 +1177,9 @@ export default {
     },
     handleSearch() {
       this.getServerList(this.searchValue);
+    },
+    handlerAssetRecycled() {
+      this.getRecysList();
     },
     // 点击节点
     handlerTreeChange(obj) {
