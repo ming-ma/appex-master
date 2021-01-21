@@ -26,8 +26,7 @@
       <Button @click="handleSearch" class="search-btn" type="primary">搜索</Button>
       <slot name="new_btn" ><Button type="primary"  @click="editModal('', 'post', '新增配置')" class="search-btn" >新增配置</Button></slot>
       <slot name="new_btn1" ><Button type="success" :loading="loading2" @click="handleUpdateServer()" class="search-btn" >拉取Server</Button></slot>
-      <Button type="warning" :loading="loading2" @click="handleUpdateRDS()" class="search-btn" >拉取RDS</Button>
-      <Button type="info" :loading="loading2" @click="handleUpdateREDIS()" class="search-btn" >拉取Redis</Button>
+      <Button type="info" :loading="loading2" @click="handleUpdateExpense()" class="search-btn" >拉取费用</Button>
 
     </div>
   <Table size="small" ref="selection" border :columns="columns" :data="tableData"></Table>
@@ -90,14 +89,6 @@
             </div>
           </FormItem>
        </div>
-        <FormItem label="区域" prop="region">
-          <div  v-if="formValidate.id">
-            <Input v-model="formValidate.region" :maxlength="50" disabled placeholder='region， 如:cn-hangzhou'></Input>
-          </div>
-          <div v-else>
-            <Input v-model="formValidate.region" :maxlength="50" placeholder='region， 如:cn-hangzhou'></Input>
-          </div>
-        </FormItem>
 
         <FormItem label="AccessID" prop="access_id">
           <Input v-model="formValidate.access_id" :maxlength="200"  placeholder='IAM SecretID/AccessID'></Input>
@@ -126,7 +117,7 @@
 
 <script>
 import FormGroup from '_c/form-group'
-import { getAssetConfigsList, operationAssetConfigs, apiPermission, handleUpdateserver, handleUpdaterds, handleUpdateredis } from '@/api/cmdb2/asset_config'
+import { getAssetConfigsList, operationAssetConfigs, apiPermission, handleUpdateserver, handleUpdateexpense } from '@/api/cmdb2/asset_config'
 import { getAdminUserList } from '@/api/cmdb2/admin_user'
 export default {
   components: {
@@ -159,12 +150,6 @@ export default {
         {
           title: '云厂商',
           key: 'account',
-          align: 'center',
-          minWidth: 100,
-        },
-        {
-          title: '区域',
-          key: 'region',
           align: 'center',
           minWidth: 100,
         },
@@ -222,44 +207,6 @@ export default {
                   }
                 },
                 'Server'
-              ),
-              h(
-                'Button',
-                {
-                  props: {
-                    type: 'warning',
-                    size: 'small',
-                    loading: this.loading
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.ApiPermission(params,'rds')
-                    }
-                  }
-                },
-                'RDS'
-              ),
-              h(
-                'Button',
-                {
-                  props: {
-                    type: 'info',
-                    size: 'small',
-                    loading: this.loading
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.ApiPermission(params, 'redis')
-                    }
-                  }
-                },
-                'Redis'
               )
             ])
           }
@@ -553,42 +500,16 @@ export default {
     },
 
 
-    handleUpdateRDS () {
+    handleUpdateExpense () {
       this.loading2 = true
       this.$Modal.confirm({
-        title: 'RDS录入',
+        title: '费用录入',
         content: '<p><p>获取开启状态中RDS数据库信息录入CMDB，详细信息可看后端日志</p>',
         loading: true,
         onOk: () => {
           setTimeout(() => {
             this.$Modal.remove()
-            handleUpdaterds().then(res => {
-              if (res.data.code === 0) {
-                this.$Message.success(`${res.data.msg}`)
-              } else {
-                this.$Message.error(`${res.data.msg}`)
-              }
-              this.loading2 = false
-            })
-          }, 3000)
-        },
-        onCancel: () => {
-          this.loading2 = false
-          this.$Message.info('Clicked cancel')
-        }
-      })
-    },
-
-    handleUpdateREDIS () {
-      this.loading2 = true
-      this.$Modal.confirm({
-        title: 'Redis录入',
-        content: '<p><p>获取开启状态中Redis/缓存/数据库信息录入CMDB，详细信息可看后端日志</p>',
-        loading: true,
-        onOk: () => {
-          setTimeout(() => {
-            this.$Modal.remove()
-            handleUpdateredis().then(res => {
+            handleUpdateexpense().then(res => {
               if (res.data.code === 0) {
                 this.$Message.success(`${res.data.msg}`)
               } else {
