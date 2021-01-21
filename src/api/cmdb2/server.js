@@ -112,6 +112,20 @@ export const getServerList = (page, limit, key, value) => {
 	});
 };
 
+// 获取回收站主机
+export const getRecysList = (page, limit, key, value) => {
+	return axios.request({
+		url: '/cmdb2/v1/cmdb/server_recyc/',
+		method: 'get',
+		params: {
+			key,
+			value,
+			page,
+			limit
+		}
+	});
+};
+
 // 获取主机详情
 export const getServerDetailList = (key, value) => {
 	return axios.request({
